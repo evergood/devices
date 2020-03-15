@@ -37,10 +37,10 @@ public class DeviceDao {
 
     public BigInteger getStableDevices(Integer projectId) {
         Session currentSession = entityManager.unwrap(Session.class);
-        NativeQuery<BigInteger> query = currentSession.createNativeQuery("SELECT COUNT(DISTINCT devices.device_id)\n" +
+        NativeQuery<BigInteger> query = currentSession.createNativeQuery("SELECT count(DISTINCT devices.device_id) -\n" +
+                "  count(DISTINCT devices.device_id) FILTER (WHERE type = 'error' OR type = 'warning' )\n" +
                 "FROM (devices JOIN events ON devices.device_id = events.device_id)\n" +
-                "WHERE project_id = ?\n" +
-                "AND events.type  NOT IN ('warning', 'error')");
+                "WHERE project_id = ?");
         query.setParameter(1, projectId);
         return query.getResultList().get(0);
     }

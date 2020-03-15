@@ -1,0 +1,24 @@
+{
+  "4BCD": {
+    "id": 45,
+    "serialNumber": "4BCD",
+    "projectId": 3,
+    "hasErrors": false,
+    "summaryInfo": {
+      "eventCount": 78,
+      "warningCount": 15,
+      "errorCount": 0
+    }
+  },
+  "4BCC": {
+    "id": 46,
+    "serialNumber": "4BCC",
+    "projectId": 3,
+    "hasErrors": true,
+    "summaryInfo": {
+      "eventCount": 0,
+      "warningCount": 5,
+      "errorCount": 19
+    }
+  }
+}

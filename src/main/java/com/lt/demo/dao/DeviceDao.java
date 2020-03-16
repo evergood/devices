@@ -1,5 +1,6 @@
 package com.lt.demo.dao;
 
+import com.lt.demo.domen.Type;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
@@ -42,6 +43,15 @@ public class DeviceDao {
                 "FROM (devices JOIN events ON devices.device_id = events.device_id)\n" +
                 "WHERE project_id = ?");
         query.setParameter(1, projectId);
+        return query.getResultList().get(0);
+    }
+
+    public BigInteger countFromDevice(Integer deviceId, Type type) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        NativeQuery<BigInteger> query = currentSession.createNativeQuery("SELECT count(*) FROM events " +
+                "WHERE device_id = ? AND type = ?");
+        query.setParameter(1, deviceId);
+        query.setParameter(2, type.name());
         return query.getResultList().get(0);
     }
 }

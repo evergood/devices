@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -25,11 +26,10 @@ public class DemoRestController {
     private ProjectService projectService;
 
     @GetMapping("/info/{projectId}")
-    public List<Project> getProjectInfo(@PathVariable int projectId) {
-        JSONObject jsonObject = new JSONObject();
-        JSONArray jsonElements = new JSONArray();
+    public BigInteger getProjectInfo(@PathVariable int projectId) {
 
-        return null;
+
+        return deviceService.countErrors(projectId);
     }
 
     @GetMapping("/info")
@@ -52,9 +52,6 @@ public class DemoRestController {
             projectObject.put("devices", devices);
             output.add(projectObject);
         }
-
-
-
         return output;
     }
 }

@@ -1,7 +1,7 @@
 package com.lt.demo.service;
 
 import com.lt.demo.dao.DeviceDao;
-import com.lt.demo.domen.Type;
+import com.lt.demo.domen.Occasion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,20 +25,20 @@ public class DeviceService {
         return deviceDao.getStableDevices(projectId);
     }
 
-    public BigInteger countErrors(Integer deviceId) {
-        return deviceDao.countFromDevice(deviceId, Type.ERROR);
+    public Long countErrors(Integer deviceId) {
+        return deviceDao.countFromDevice(deviceId, Occasion.ERROR);
     }
 
-    public BigInteger countWarnings(Integer deviceId) {
-        return deviceDao.countFromDevice(deviceId, Type.WARNING);
+    public Long countWarnings(Integer deviceId) {
+        return deviceDao.countFromDevice(deviceId, Occasion.WARNING);
     }
 
-    public BigInteger countEvents(Integer deviceId) {
-        return deviceDao.countFromDevice(deviceId, Type.EVENT);
+    public Long countEvents(Integer deviceId) {
+        return deviceDao.countFromDevice(deviceId, Occasion.EVENT);
     }
 
     public boolean hasErrors(Integer deviceId) {
-        return countWarnings(deviceId).compareTo(BigInteger.ZERO) > 0 ||
-                countErrors(deviceId).compareTo(BigInteger.ZERO) > 0;
+        return countWarnings(deviceId) > 0 ||
+                countErrors(deviceId) > 0;
     }
 }

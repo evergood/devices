@@ -1,6 +1,6 @@
 package com.lt.demo.domen;
 
-public enum Type {
+public enum Occasion {
     EVENT,
     WARNING,
     ERROR

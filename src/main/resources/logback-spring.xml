@@ -7,6 +7,10 @@
         </encoder>
     </appender>
 
+    <logger name="org.hibernate" level="trace" additivity="false">
+        <appender-ref ref="SAVE-TO-FILE"/>
+    </logger>
+
     <logger name="com.lt.demo" level="trace" additivity="false">
         <appender-ref ref="SAVE-TO-FILE"/>
     </logger>

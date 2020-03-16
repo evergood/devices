@@ -1,5 +1,6 @@
 package com.lt.demo.domen.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lt.demo.domen.Type;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class Event {
             CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     @JoinColumn(name = "device_id")
+    @JsonIgnore
     private Device device;
 
     @Column(name = "date")

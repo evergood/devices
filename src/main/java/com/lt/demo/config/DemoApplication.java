@@ -23,7 +23,7 @@ public class DemoApplication extends SpringBootServletInitializer implements Web
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.lt.demo.entity");
+        sessionFactory.setPackagesToScan("com.lt.demo.domen.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;

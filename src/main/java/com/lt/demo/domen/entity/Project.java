@@ -1,14 +1,8 @@
-package com.lt.demo.entity;
+package com.lt.demo.domen.entity;
 
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -24,6 +18,6 @@ public class Project {
     private String name;
 
     @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+            CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Device> devices;
 }

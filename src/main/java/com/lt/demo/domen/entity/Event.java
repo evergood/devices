@@ -1,17 +1,9 @@
-package com.lt.demo.entity;
+package com.lt.demo.domen.entity;
 
 import com.lt.demo.domen.Type;
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,8 +15,9 @@ public class Event {
     @Column(name = "event_id")
     private Integer id;
 
-    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
     @JoinColumn(name = "device_id")
     private Device device;
 

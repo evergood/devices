@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigInteger;
-import java.util.List;
-
 @RestController
 @Slf4j
 public class DemoRestController {
@@ -26,10 +23,25 @@ public class DemoRestController {
     private ProjectService projectService;
 
     @GetMapping("/info/{projectId}")
-    public BigInteger getProjectInfo(@PathVariable int projectId) {
+    public JSONObject getProjectInfo(@PathVariable int projectId) {
 
+        Project project = projectService.getProjectById(projectId);
+        JSONObject deviceObject = new JSONObject();
+        for (Device device : project.getDevices()) {
+            JSONObject body = new JSONObject();
+            body.put("id", device.getId());
+            body.put("serialnumber", device.getSerialNumber());
+            body.put("projectId", projectId);
+            body.put("hasErrors", deviceService.hasErrors(device.getId()));
+            JSONObject summary = new JSONObject();
+            summary.put("eventCount", deviceService.countEvents(device.getId()));
+            summary.put("warningCount", deviceService.countWarnings(device.getId()));
+            summary.put("errorCount", deviceService.countErrors(device.getId()));
+            body.put("summaryInfo", summary);
+            deviceObject.put(device.getSerialNumber(), body);
+        }
 
-        return deviceService.countErrors(projectId);
+        return deviceObject;
     }
 
     @GetMapping("/info")

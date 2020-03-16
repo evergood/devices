@@ -16,9 +16,15 @@ public class ProjectDao {
     private EntityManager entityManager;
 
     public List<Project> findAllProjects() {
-
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Project> query = currentSession.createQuery("FROM Project", Project.class);
         return query.list();
+    }
+
+    public Project findProjectById(Integer projectId) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<Project> query = currentSession.createQuery("FROM Project p WHERE p.id=:id", Project.class);
+        query.setParameter("id", projectId);
+        return query.getSingleResult();
     }
 }

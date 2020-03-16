@@ -16,4 +16,8 @@ public class ProjectService {
     public List<Project> getAllProjects() {
         return projectDao.findAllProjects();
     }
+
+    public Project getProjectById(Integer projectId) {
+        return projectDao.findProjectById(projectId);
+    }
 }
